@@ -15,6 +15,7 @@ sequenceDiagram
     participant FS as Файловая система
     participant SE as Stroidex Engine
     participant P as Parser
+    participant LLM as Anthropic API
     participant DB as PostgreSQL stroidok
     participant User as Инженер ПТО
 
@@ -28,6 +29,11 @@ sequenceDiagram
     P->>SE: Распарсенный документ
 
     SE->>DB: Сохранение в таблицу documents
+    DB->>SE: Подтверждение сохранения
+
+    SE->>LLM: Запрос на создание эмбеддингов
+    LLM->>SE: Векторные представления
+    SE->>DB: Сохранение эмбеддингов в document_embeddings
     DB->>SE: Подтверждение сохранения
 
     SE->>User: Уведомление об успешной индексации (опционально)
@@ -71,7 +77,7 @@ sequenceDiagram
     participant User as Пользователь
     participant CC as Claude Code
     participant SM as StroiMCP
-    participant LLM as OpenAI/Claude API
+    participant LLM as Anthropic API
     participant DB as PostgreSQL stroidok
     participant Cache as Redis Cache
 
@@ -139,7 +145,7 @@ sequenceDiagram
     participant CC as Claude Code
     participant SM as StroiMCP
     participant NL2SQL as Text-to-SQL Service
-    participant LLM as OpenAI API
+    participant LLM as Anthropic API
     participant DB as PostgreSQL stroidok
 
     User->>CC: "Покажи все PDF документы за последний месяц"

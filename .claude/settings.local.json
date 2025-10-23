@@ -22,7 +22,13 @@
       "Bash(ls:*)",
       "Bash(claude mcp:*)",
       "Bash(npx:*)",
-      "Bash(npm search:*)"
+      "Bash(npm search:*)",
+      "Bash(for:*)",
+      "Bash(do if [ -f \"$file\" ])",
+      "Bash(then:*)",
+      "Bash(else echo \"❌ $file отсутствует\")",
+      "Bash(fi)",
+      "Bash(done:*)"
     ],
     "deny": [],
     "ask": []

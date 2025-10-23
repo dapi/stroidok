@@ -56,8 +56,8 @@ CREATE TABLE document_embeddings (
 ```
 
 **Назначение:** Хранение эмбеддингов для семантического поиска
-**Кто пишет:** StroiMCP
-**Кто читает:** StroiMCP
+**Кто пишет:** Stroidex
+**Кто читает:** Stroidex, StroiMCP
 
 ### 3. document_pages - Страницы документов (для PDF)
 
@@ -266,7 +266,7 @@ GROUP BY file_type;
 -- Роль для Stroidex (запись и чтение данных)
 CREATE ROLE stroidex WITH LOGIN PASSWORD 'secure_password';
 
--- Роль для StroiMCP (чтение данных, создание эмбеддингов)
+-- Роль для StroiMCP (только чтение данных)
 CREATE ROLE stroimcp WITH LOGIN PASSWORD 'secure_password';
 
 -- Администратор базы данных
@@ -276,19 +276,19 @@ CREATE ROLE stroidok_admin WITH LOGIN PASSWORD 'admin_password';
 ### Права доступа
 
 ```sql
--- Права для stroidex (индексатор)
+-- Права для stroidex (индексатор + создание эмбеддингов)
 GRANT SELECT, INSERT, UPDATE ON documents TO stroidex;
 GRANT SELECT, INSERT, UPDATE ON document_pages TO stroidex;
 GRANT SELECT, INSERT, UPDATE ON document_sheets TO stroidex;
 GRANT SELECT, INSERT, UPDATE ON processing_errors TO stroidex;
-GRANT SELECT ON document_embeddings TO stroidex; -- Только чтение эмбеддингов
+GRANT SELECT, INSERT, UPDATE ON document_embeddings TO stroidex; -- Полные права на эмбеддинги
 GRANT USAGE ON ALL SEQUENCES IN SCHEMA public TO stroidex;
 
--- Права для stroimcp (поисковый сервер)
+-- Права для stroimcp (поисковый сервер - только чтение)
 GRANT SELECT ON documents TO stroimcp;
 GRANT SELECT ON document_pages TO stroimcp;
 GRANT SELECT ON document_sheets TO stroimcp;
-GRANT SELECT, INSERT, UPDATE ON document_embeddings TO stroimcp; -- Может создавать эмбеддинги
+GRANT SELECT ON document_embeddings TO stroimcp; -- Только чтение эмбеддингов
 GRANT USAGE ON ALL SEQUENCES IN SCHEMA public TO stroimcp;
 
 -- Права для администратора
