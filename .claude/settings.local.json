@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(mkdir:*)",
+      "Bash(go version:*)",
+      "Bash(go mod init:*)",
+      "Bash(go get:*)",
+      "Bash(go build:*)",
+      "Bash(go mod tidy:*)",
+      "Bash(./stroidok:*)",
+      "Bash(go test:*)",
+      "Bash(make:*)",
+      "Bash(echo:*)",
+      "Bash(./stroidex:*)",
+      "Bash(xargs:*)",
+      "Bash(tree:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(claude mcp:*)",
+      "Bash(npx:*)",
+      "Bash(npm search:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
